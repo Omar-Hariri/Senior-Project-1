@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Data 
+data/raw/
+data/processed/
+data/external/
+
+# Artifacts 
+artifacts/models/*.pth
+artifacts/models/*.pkl
+
+
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
