@@ -1,0 +1,18 @@
+# configs/svm_config.yaml
+# =====================
+
+wandb:
+  project: driver-monitoring-system
+  experiment_name: SVM_LODO_CV
+  entity: omarhariri-syrian-private-university
+
+model:
+  C: 1.0
+  kernel: "rbf"
+  class_weight: "balanced"
+  max_iter: 2000
+  probability: true
+  random_state: 42
+
+output:
+  class_names: ["NORMAL", "AGGRESSIVE", "DROWSY"]

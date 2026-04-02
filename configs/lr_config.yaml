@@ -1,0 +1,16 @@
+# configs/lr_config.yaml
+# =====================
+
+wandb:
+  project: driver-monitoring-system
+  experiment_name: LogisticRegression_LODO_CV
+  entity: omarhariri-syrian-private-university
+
+model:
+  max_iter: 5000
+  class_weight: "balanced"
+  random_state: 42
+  C: 1.0
+
+output:
+  class_names: ["NORMAL", "AGGRESSIVE", "DROWSY"]

@@ -1,0 +1,41 @@
+model:
+  variant: yolov8n
+  num_classes: 5
+  image_size: 640
+  class_names:
+    - Eye_Closure
+    - Yawning
+    - Seat_Belt
+    - Smoking
+    - Phone_Usage
+
+training:
+  epochs: 100
+  batch_size: 16
+  learning_rate: 0.01
+  optimizer: SGD
+  seed: 42
+  workers: 4
+  device: 0          # 0 = GPU, cpu = CPU
+  patience: 20       # early stopping
+  augment: true
+
+dataset:
+  train: data/processed/adms/train
+  val:   data/processed/adms/val
+  test:  data/processed/adms/test
+  version: v1
+  split:
+    train: 0.70
+    val:   0.15
+    test:  0.15
+
+logging:
+  project_name: driver-detection-yolo
+  run_name: yolov8n-baseline
+  wandb_mode: online    # set to 'offline' if needed
+
+artifacts:
+  models:  artifacts/models/yolo
+  metrics: artifacts/metrics/yolo
+  experiments: artifacts/experiments/yolo
