@@ -11,12 +11,10 @@ env/
 data/raw/
 data/processed/
 data/external/
+data/ready/
 
 # Artifacts 
-artifacts/models/*.pth
-artifacts/models/*.pkl
-
-
+artifacts/models/
 
 # Jupyter
 .ipynb_checkpoints/
@@ -28,3 +26,7 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+.cursor/
+
+# Weights & Biases
+wandb/
