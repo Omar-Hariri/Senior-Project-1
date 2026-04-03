@@ -1,25 +1,13 @@
-"""
-YOLOv8 Training Script
-Entry point: python -m src.training.train_yolo --config configs/yolo_config.yaml
-Responsibility: Training loop + Weights & Biases (W&B) logging.
-Functional style.
-"""
-
-import argparse
 import json
-import os
 import random
 import shutil
 from pathlib import Path
-
 import numpy as np
 import torch
-import yaml
 import wandb
 
-from src.data.adms_loader import load_yaml_config
-from src.models.deep.yolo import build_yolo_model
-
+from src.data.vision.adms_loader import load_yaml_config
+from src.models.vision.yolo import build_yolo_model
 
 def set_seed(seed: int) -> None:
     random.seed(seed)
@@ -28,9 +16,12 @@ def set_seed(seed: int) -> None:
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
 
-
-def train_yolo(config_path: str) -> None:
-    """Main training loop for YOLOv8."""
+def run(config: dict) -> None:
+    """
+    Main training pipeline loop for YOLOv8.
+    Loads data -> Trains -> Evaluates -> Logs to W&B.
+    """
+    config_path = config.get("yolo_config", "configs/models/vision/yolo.yaml")
     cfg = load_yaml_config(config_path)
 
     # ── Seed ──────────────────────────────────────────────────────────────
@@ -57,7 +48,7 @@ def train_yolo(config_path: str) -> None:
     model = build_yolo_model(variant=cfg["model"]["variant"])
 
     # ── Train ─────────────────────────────────────────────────────────
-    print(f"\n[Training] Starting YOLOv8 training...")
+    print(f"\n[Training] Starting YOLOv8 training pipeline...")
     print(f"  Config : {config_path}")
     print(f"  Data   : {data_yaml_path}")
     print(f"  Epochs : {cfg['training']['epochs']}")
@@ -77,7 +68,7 @@ def train_yolo(config_path: str) -> None:
         augment     = cfg["training"]["augment"],
         project     = str(cfg["artifacts"]["experiments"]),
         name        = cfg["logging"]["run_name"],
-        exist_ok    = True,
+        exist_ok    =True,
         verbose     = True,
     )
 
@@ -123,10 +114,3 @@ def train_yolo(config_path: str) -> None:
     print(f"  Recall    : {metrics_summary['recall']:.4f}")
     
     wandb.finish()
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Train YOLOv8 on ADMS dataset")
-    parser.add_argument("--config", type=str, default="configs/yolo_config.yaml")
-    args = parser.parse_args()
-    train_yolo(args.config)

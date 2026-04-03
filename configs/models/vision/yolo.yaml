@@ -33,7 +33,6 @@ dataset:
 logging:
   project_name: driver-detection-yolo
   run_name: yolov8n-baseline
-  wandb_mode: online    # set to 'offline' if needed
 
 artifacts:
   models:  artifacts/models/yolo

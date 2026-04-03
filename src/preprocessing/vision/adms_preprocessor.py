@@ -20,7 +20,7 @@ from typing import Dict, List, Tuple
 
 import yaml
 
-from src.data.adms_loader import get_adms_image_paths, CLASS_NAMES, CLASS_TO_IDX
+from src.data.vision.adms_loader import get_adms_image_paths, CLASS_NAMES, CLASS_TO_IDX
 
 
 DUMMY_BBOX = "0.5 0.5 0.9 0.9"   # fallback if no real annotations exist

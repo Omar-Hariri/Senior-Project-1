@@ -13,8 +13,8 @@ from typing import Dict, List
 
 import cv2
 
-from src.data.adms_loader import load_yaml_config, CLASS_NAMES
-from src.models.deep.yolo import build_yolo_model
+from src.data.vision.adms_loader import load_yaml_config, CLASS_NAMES
+from src.models.vision.yolo import build_yolo_model
 
 
 def build_fusion_output(frame_id: int, results) -> Dict:
